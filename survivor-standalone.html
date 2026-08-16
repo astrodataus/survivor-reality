@@ -1125,6 +1125,11 @@
         }
 
         /* ── Footer ──────────────────────────────────────────────────── */
+/* Footer links keep the footer's own type treatment and only pick up an
+           underline on hover, so the row still reads as one line of small caps. */
+        .appfoot a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+        .appfoot a:hover { color: var(--ink); border-bottom-color: currentColor; }
+
         .appfoot {
             border-top: 1px solid var(--line);
             background: var(--paper);
@@ -1474,10 +1479,10 @@
     </div>
 
     <footer class="appfoot">
-        <span>Built by Astrodata</span><span class="sep">/</span>
+        <a href="https://astrodata.us" target="_blank" rel="noopener">Built by Astrodata</a><span class="sep">/</span>
         <span>Omni Apps</span><span class="sep">/</span>
         <span>Demo data, not affiliated with the broadcaster</span>
-        <span class="right" id="theme-name">Taliesin West · Midnight</span>
+        <a class="right" href="https://design.wagabaza.com" target="_blank" rel="noopener">Design System</a>
     </footer>
 
     <script>
@@ -1500,7 +1505,6 @@
            Theme toggle
            ══════════════════════════════════════════════════════════════ */
         const themeBtn = document.getElementById('theme-btn');
-        const themeName = document.getElementById('theme-name');
         themeBtn.addEventListener('click', () => {
             const d = document.documentElement;
             const next = d.getAttribute('data-theme') === 'noon' ? 'midnight' : 'noon';
@@ -1508,7 +1512,6 @@
             const label = next === 'noon' ? 'Switch to Midnight theme' : 'Switch to Noon Desert theme';
             themeBtn.setAttribute('aria-label', label);
             themeBtn.title = label;
-            themeName.textContent = next === 'noon' ? 'Taliesin West · Noon Desert' : 'Taliesin West · Midnight';
             if (lastVoteRows) renderVoteNetwork(lastVoteRows, lastTribeColorMap);
         });
 
